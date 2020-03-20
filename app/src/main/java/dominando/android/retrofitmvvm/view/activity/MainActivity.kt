@@ -10,38 +10,31 @@ import dominando.android.retrofitmvvm.R
 import dominando.android.retrofitmvvm.model.Result
 import dominando.android.retrofitmvvm.view.adapter.CharacterAdapter
 import dominando.android.retrofitmvvm.viewmodel.CharactersViewModel
-
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
-
     private var recyclerView: RecyclerView? = null
-    private var characterViewModel: CharactersViewModel? = null
-    val results: List<Result> = ArrayList()
-    private var adapter: CharacterAdapter? = null
-
-
+    private var charactersViewModel: CharactersViewModel? = null
+    private val results: List<Result> = ArrayList()
+    private var adapterCharacters: CharacterAdapter? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         initViews()
 
-        recyclerView?.layoutManager = GridLayoutManager(this, 2)
-        recyclerView?.adapter = adapter
+        recyclerView!!.layoutManager = GridLayoutManager(this, 3)
+        recyclerView!!.adapter = adapterCharacters
 
-        characterViewModel?.Listcharacter
-
-        characterViewModel?.listLiveData!!.observe(this,
-            Observer<List<Result?>> { results1: List<Result?> ->
-                CharacterAdapter(results).setUpdate(results1)
-            })
-
+        charactersViewModel!!.listCharacters
+        charactersViewModel!!.listLiveData.observe(this,
+            Observer { results1: List<Result>? -> adapterCharacters!!.setUpdate(results1) })
     }
 
-    private fun initViews() {
+    fun initViews() {
 
         recyclerView = findViewById(R.id.recyclerView)
-        characterViewModel = ViewModelProviders.of(this).get(CharactersViewModel::class.java)
-        adapter = CharacterAdapter(results)
+        charactersViewModel = ViewModelProviders.of(this).get(CharactersViewModel::class.java)
+        adapterCharacters = CharacterAdapter(results)
     }
 }

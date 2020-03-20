@@ -13,23 +13,21 @@ import io.reactivex.schedulers.Schedulers
 
 
 class CharactersViewModel(application: Application) : AndroidViewModel(application) {
-
     private val listMutableLiveData = MutableLiveData<List<Result>>()
-    val listLiveData: LiveData<List<Result>> = listMutableLiveData
+    var listLiveData: LiveData<List<Result>> = listMutableLiveData
     private val disposable = CompositeDisposable()
-    private val repository = CharacterRepository()
-
-    val Listcharacter: Unit
+    private val respository = CharacterRepository()
+    val listCharacters: Unit
         get() {
             disposable.add(
-                repository.characterResponseObservable()!!
+                respository.characterResponseObservable()!!
                     .subscribeOn(Schedulers.newThread())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe({ charactersResponse ->
-                        listMutableLiveData.setValue(charactersResponse?.results) })
-                    { throwable -> Log.i("ERREI", "MESSAGE -> " + throwable.message) })
+                        listMutableLiveData.setValue(charactersResponse?.results) },
+                        { throwable: Throwable -> Log.i("LOG", "MESSAGE -> " + throwable.message) })
+            )
         }
-
 }
 
 

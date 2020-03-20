@@ -1,12 +1,11 @@
 package dominando.android.retrofitmvvm.repository
 
-import ServiceRetrofit.Companion.getApiService
+import ServiceRetroFit.apiService
 import dominando.android.retrofitmvvm.model.CharactersResponse
 import io.reactivex.Observable
 
 class CharacterRepository {
-
     fun characterResponseObservable(): Observable<CharactersResponse?>? {
-        return getApiService.getCharactersResponse()
+        return apiService.charactersResponse
     }
 }

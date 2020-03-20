@@ -15,8 +15,8 @@
 
 
 <ImageView
-    android:id="@+id/txtCharacter"
-        android:layout_width="72dp"
+    android:id="@+id/imgCharacter"
+        android:layout_width="107dp"
         android:layout_height="107dp"
         android:layout_gravity="center_horizontal"
         android:backgroundTint="@android:color/white"
@@ -25,7 +25,7 @@
         android:src="@drawable/ronaldinho" />
 
     <TextView
-        android:id="@+id/imgCharacter"
+        android:id="@+id/txtCharacter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="120dp"

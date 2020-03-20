@@ -6,7 +6,6 @@ class CharactersResponse {
     @Expose
     var info: Info? = null
     @Expose
-    var results: List<Result>? =
-        null
+    var results: List<Result>? = null
 
 }
